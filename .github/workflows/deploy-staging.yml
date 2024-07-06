@@ -5,7 +5,12 @@ on:
     types: [labeled]
 
 jobs:
-  build:
+  echo-input:
     runs-on: ubuntu-latest
-
-    if: contains(github.event.pull_request.labels.*.name, 'stage')
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/github-script@v7
+        with:
+            script: |
+              const script = require('./path/to/script.js')
+              console.log(script({github, context}))
